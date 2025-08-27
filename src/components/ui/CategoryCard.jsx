@@ -10,13 +10,16 @@ export default function CategoryCard({ name, image, rounded = "rounded-xl" }) {
       <img
         src={image}
         alt={name}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover group-hover:scale-105"
       />
-      <div className="absolute bottom-0 w-full bg-gray-900/30  text-white p-4">
-        <h3 className="text-lg font-semibold">{name}</h3>
-        <p className="text-sm text-gray-300">View more <span className="inline-block text-2xl transition-transform duration-300 group-hover:translate-x-1">
+      <div className="absolute bottom-0 w-full bg-gray-900/30  text-white p-2">
+        <h3 className="text-lg font-semibold group-hover:text-orange-500">{name}</h3>
+        <div className="flex items-center"> 
+          <p className="text-sm">View meals </p>
+          <p className=" text-2xl transition-transform duration-300 group-hover:translate-x-1">
               →
-            </span></p>
+            </p> </div>
+       
       </div>
     </div>
 
