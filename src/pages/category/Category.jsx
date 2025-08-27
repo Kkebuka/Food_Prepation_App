@@ -25,7 +25,7 @@ import { useQuery } from '@tanstack/react-query'
           <div className="flex w-full items-center justify-center py-8 text-sm text-gray-500">Loading...</div>
         )}
         {!isLoading && categories.map((category) => (
-          <div key={category.idCategory} className="flex-1 shrink-0">
+          <div key={category.idCategory} className="flex-0 shrink-0">
             <CategoryCard
               image={category.strCategoryThumb}
               name={category.strCategory}
