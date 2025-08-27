@@ -58,7 +58,9 @@ function Home() {
         </div>
       </section>
 
+<Category />
       {/* Main Menu Section */}
+      
       <section className="py-6 sm:py-8 lg:py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-4 flex items-end justify-between">
