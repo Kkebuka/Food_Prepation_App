@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFavorites } from "../../contexts/FavoritesContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isFavOpen, setIsFavOpen] = useState(false);
   const { favorites } = useFavorites();
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const onSearchSubmit = (e) => {
+    e.preventDefault();
+    const q = query.trim();
+    if (!q) return;
+    setIsMobileOpen(false);
+    navigate(`/meals?query=${encodeURIComponent(q)}`);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200/70 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
@@ -27,7 +38,7 @@ function Header() {
 
           {/* Center: Search */}
           <div className="mx-4 hidden flex-1 sm:mx-6 md:block">
-            <div className="relative">
+            <form className="relative" onSubmit={onSearchSubmit}>
               <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
                   <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 4.243 12.002l4.002 4.002a.75.75 0 1 0 1.06-1.06l-4.002-4.002A6.75 6.75 0 0 0 10.5 3.75Zm-5.25 6.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Z" clipRule="evenodd" />
@@ -37,8 +48,10 @@ function Header() {
                 type="text"
                 placeholder="Search dishes, ingredients, cuisines..."
                 className="w-full rounded-full border border-gray-200 bg-white/70 py-2.5 pl-10 pr-4 text-sm text-gray-900 shadow-sm outline-none ring-0 transition focus:border-rose-300 focus:ring-2 focus:ring-rose-200/70"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
               />
-            </div>
+            </form>
           </div>
 
           {/* Right: Actions */}
@@ -64,7 +77,7 @@ function Header() {
                     <div className="py-6 text-center text-sm text-gray-500">No favorites yet</div>
                   )}
                   {favorites.map((m) => (
-                    <Link key={m.id} to={`/food/${m.id}`} className="flex items-center gap-3 rounded-lg p-2 hover:bg-gray-50">
+                    <Link key={m.id} to={`/details/${m.id}`} className="flex items-center gap-3 rounded-lg p-2 hover:bg-gray-50">
                       <img src={m.image} alt={m.name} className="h-10 w-10 rounded object-cover" />
                       <div className="line-clamp-2 text-sm text-gray-800">{m.name}</div>
                     </Link>
@@ -94,7 +107,7 @@ function Header() {
         <div className={`${isMobileOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} grid transition-all duration-300 ease-out md:hidden`}>
           <div className="overflow-hidden">
             <div className="pb-3 pt-2">
-              <div className="relative">
+              <form className="relative" onSubmit={onSearchSubmit}>
                 <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
                     <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 4.243 12.002l4.002 4.002a.75.75 0 1 0 1.06-1.06l-4.002-4.002A6.75 6.75 0 0 0 10.5 3.75Zm-5.25 6.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Z" clipRule="evenodd" />
@@ -104,8 +117,10 @@ function Header() {
                   type="text"
                   placeholder="Search dishes, ingredients, cuisines..."
                   className="w-full rounded-full border border-gray-200 bg-white/70 py-2.5 pl-10 pr-4 text-sm text-gray-900 shadow-sm outline-none ring-0 transition focus:border-rose-300 focus:ring-2 focus:ring-rose-200/70"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                 />
-              </div>
+              </form>
               <nav className="mt-3 grid gap-1">
                 <Link to="/" className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Home</Link>
                 <Link to="/categories" className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Category</Link>

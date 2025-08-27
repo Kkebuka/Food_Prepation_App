@@ -38,7 +38,8 @@ function Home() {
     return list;
   }, [mealsData, sortOrder, startsWith]);
 
-  const { toggleFavorite } = useFavorites();
+  const { toggleFavorite, favorites } = useFavorites();
+  const favoriteIds = useMemo(() => new Set(favorites.map((f) => f.id)), [favorites]);
 
   return (
     <main>
@@ -120,11 +121,11 @@ function Home() {
                   </h3>
                    
                   <button
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-gray-700 transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-600"
+                    className={`inline-flex h-9 w-9 items-center justify-center rounded-full border transition hover:border-rose-300 hover:bg-rose-50 ${favoriteIds.has(meal.id) ? "border-rose-300 bg-rose-50 text-rose-600" : "border-gray-200 text-gray-700"}`}
                     aria-label="Save for later"
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(meal); }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`h-5 w-5 ${favoriteIds.has(meal.id) ? "text-rose-600" : "text-current"}`}>
                       <path d="M11.645 20.91a.75.75 0 0 1-.79 0c-1.873-1.12-3.995-2.885-5.66-4.768C3.48 14.667 2.25 12.77 2.25 10.5 2.25 7.186 4.936 4.5 8.25 4.5c1.676 0 3.174.696 4.25 1.811A5.864 5.864 0 0 1 16.75 4.5c3.314 0 6 2.686 6 6 0 2.27-1.23 4.167-2.945 5.642-1.665 1.883-3.787 3.649-5.66 4.768Z"/>
                     </svg>
                   </button>
