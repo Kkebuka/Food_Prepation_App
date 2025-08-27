@@ -1,44 +1,41 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import Category from "./components/category";
 
 function Home() {
-  const meals = [
-    {
-      id: 1,
-      name: "Spicy Shrimp Ramen",
-      image:
-        "https://images.unsplash.com/photo-1546549039-49cc4f5b6c28?q=80&w=1200&auto=format&fit=crop",
+  const [selectedCategory, setSelectedCategory] = useState("Beef");
+  const [sortOrder, setSortOrder] = useState("A-Z");
+  const [startsWith, setStartsWith] = useState("");
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const res = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php");
+      if (!res.ok) throw new Error("Failed to fetch categories");
+      const json = await res.json();
+      return json?.categories ?? [];
     },
-    {
-      id: 2,
-      name: "Grilled Chicken Bowl",
-      image:
-        "https://images.unsplash.com/photo-1604908554027-669a4f6c1c5f?q=80&w=1200&auto=format&fit=crop",
+  });
+
+  const { data: mealsData, isLoading: mealsLoading } = useQuery({
+    queryKey: ["meals", selectedCategory],
+    queryFn: async () => {
+      const res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${encodeURIComponent(selectedCategory)}`);
+      if (!res.ok) throw new Error("Failed to fetch meals");
+      const json = await res.json();
+      return json?.meals ?? [];
     },
-    {
-      id: 3,
-      name: "Creamy Pesto Pasta",
-      image:
-        "https://images.unsplash.com/photo-1521389508051-d7ffb5dc8bbf?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      id: 4,
-      name: "Steak with Herb Butter",
-      image:
-        "https://images.unsplash.com/photo-1553163147-622ab57be1c7?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      id: 5,
-      name: "Veggie Avocado Toast",
-      image:
-        "https://images.unsplash.com/photo-1542691457-cbe4df041eb2?q=80&w=1200&auto=format&fit=crop",
-    },
-    {
-      id: 6,
-      name: "Berry Pancake Stack",
-      image:
-        "https://images.unsplash.com/photo-1495214783159-3503fd1b572d?q=80&w=1200&auto=format&fit=crop",
-    },
-  ];
+  });
+
+  const filteredMeals = useMemo(() => {
+    let list = (mealsData || []).map((m) => ({ id: m.idMeal, name: m.strMeal, image: m.strMealThumb }));
+    if (startsWith) {
+      list = list.filter((m) => m.name.toLowerCase().startsWith(startsWith.toLowerCase()));
+    }
+    list.sort((a, b) => sortOrder === "A-Z" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+    return list;
+  }, [mealsData, sortOrder, startsWith]);
 
   return (
     <main>
@@ -63,15 +60,43 @@ function Home() {
       
       <section className="py-6 sm:py-8 lg:py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-4 flex items-end justify-between">
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">Main Menu</h2>
               <p className="mt-1 text-sm text-gray-600">Explore our favorites to get inspired.</p>
             </div>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="rounded-full border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 shadow-sm outline-none transition focus:border-rose-300 focus:ring-2 focus:ring-rose-200/70"
+              >
+                {(categories || []).map((c) => (
+                  <option key={c.idCategory} value={c.strCategory}>{c.strCategory}</option>
+                ))}
+              </select>
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                className="rounded-full border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 shadow-sm outline-none transition focus:border-rose-300 focus:ring-2 focus:ring-rose-200/70"
+              >
+                <option value="A-Z">Sort: A–Z</option>
+                <option value="Z-A">Sort: Z–A</option>
+              </select>
+              <input
+                value={startsWith}
+                onChange={(e) => setStartsWith(e.target.value)}
+                placeholder="Starts with..."
+                className="rounded-full border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 shadow-sm outline-none transition placeholder:text-gray-400 focus:border-rose-300 focus:ring-2 focus:ring-rose-200/70"
+              />
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
-            {meals.map((meal) => (
+            {mealsLoading && (
+              <div className="col-span-full py-10 text-center text-sm text-gray-500">Loading meals...</div>
+            )}
+            {!mealsLoading && filteredMeals.map((meal) => (
               <article
                 key={meal.id}
                 className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md"
@@ -89,6 +114,7 @@ function Home() {
                   <h3 className="line-clamp-1 text-sm font-semibold text-gray-900 sm:text-base">
                     {meal.name}
                   </h3>
+                  <Link to={`/food/${meal.id}`} className="text-sm font-medium text-rose-600 hover:underline">Details</Link>
                   <button
                     className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-gray-700 transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-600"
                     aria-label="Save for later"

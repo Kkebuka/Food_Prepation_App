@@ -3,9 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 function FoodDetails() {
-  // const { id } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
-  let id = 52874
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["meal", id],
