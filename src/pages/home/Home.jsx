@@ -44,16 +44,20 @@ function Home() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-rose-50 via-white to-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="py-12 sm:py-16 lg:py-20">
-            <div className="mx-auto max-w-3xl text-center">
-              <h1 className="text-justify text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
-                Home of delicious recipe
-              </h1>
-              <p className="mt-4 text-justify text-base text-gray-600 sm:text-lg">
-                Experience the process of making the best meals
-              </p>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="relative">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="py-14 sm:py-20 lg:py-28">
+              <div className="mx-auto max-w-3xl flex flex-col gap-4 align-center items-center justify-center   ">
+                <h1 className="text-justify text-3xl font-extrabold tracking-tight flex   text-white sm:text-4xl md:text-5xl">
+                  Home of delicious recipe
+                </h1>
+                <p className="mt-4 text-justify text-base text-gray-100 sm:text-lg">
+                  Experience the process of making the best meals
+                </p>
+              </div>
             </div>
           </div>
         </div>
