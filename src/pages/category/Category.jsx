@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query'
     }
   })
 
-  const categories = (data || []).slice(0, 8)
+  const categories = (data || [])
 
   return (
     <div className="pb-4 lg:block ">
@@ -25,7 +25,7 @@ import { useQuery } from '@tanstack/react-query'
           <div className="flex w-full items-center justify-center py-8 text-sm text-gray-500">Loading...</div>
         )}
         {!isLoading && categories.map((category) => (
-          <div key={category.idCategory} className="min-w-[200px]  flex-1 shrink-0">
+          <div key={category.idCategory} className="min-w-[200px] rounded-full flex-1 shrink-0">
             <CategoryCard
               image={category.strCategoryThumb}
               name={category.strCategory}
