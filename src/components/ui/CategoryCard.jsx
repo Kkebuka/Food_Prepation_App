@@ -15,10 +15,10 @@ export default function CategoryCard({ name, image, rounded = "rounded-xl" }) {
         />
       </figure>
 
-      {/* Overlay Content */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 sm:p-4 flex flex-col justify-end">
+      {/* Overlay Content (no unstable gradient) */}
+      <div className="absolute bottom-0 left-0 right-0 bg-black/30 p-3 sm:p-4 flex flex-col justify-end">
         <div className="text-white">
-          <h3 className="text-lg sm:text-xl font-bold font-fredoka group-hover:text-primary transition-colors">
+          <h3 className="text-lg sm:text-xl font-bold font-fredoka group-hover:text-orange-500 transition-colors">
             {name}
           </h3>
 
@@ -30,11 +30,6 @@ export default function CategoryCard({ name, image, rounded = "rounded-xl" }) {
           </div>
         </div>
       </div>
-
-      {/* Hover border effect */}
-      <div
-        className={`absolute inset-0 border-2 border-transparent ${rounded} group-hover:border-primary/30 transition-colors duration-300 pointer-events-none`}
-      ></div>
     </Link>
   );
 }
