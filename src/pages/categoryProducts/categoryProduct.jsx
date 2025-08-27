@@ -69,6 +69,7 @@ function CategoryProduct() {
         {!isLoading && !isError && (
           <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
             {meals.map((meal) => (
+              <Link to={`/details/${meal.id}`}>
               <article key={meal.id} className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img src={meal.image} alt={meal.name} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
@@ -77,7 +78,6 @@ function CategoryProduct() {
                 <div className="flex items-center justify-between px-3 py-3 sm:px-4 sm:py-4">
                   <h3 className="line-clamp-1 text-sm font-semibold text-gray-900 sm:text-base">{meal.name}</h3>
                   <div className="flex items-center gap-3">
-                    <Link to={`/details/${meal.id}`} className="text-sm font-medium text-rose-600 hover:underline">Details</Link>
                     <button
                       className={`inline-flex h-9 w-9 items-center justify-center rounded-full border transition hover:border-rose-300 hover:bg-rose-50 ${favoriteIds.has(meal.id) ? 'border-rose-300 bg-rose-50 text-rose-600' : 'border-gray-200 text-gray-700'}`}
                       aria-label="Save for later"
@@ -90,6 +90,7 @@ function CategoryProduct() {
                   </div>
                 </div>
               </article>
+              </Link>
             ))}
           </div>
         )}
