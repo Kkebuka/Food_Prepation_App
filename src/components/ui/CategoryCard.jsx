@@ -16,15 +16,15 @@ export default function CategoryCard({ name, image, rounded = "rounded-xl" }) {
       </figure>
 
       {/* Overlay Content (no unstable gradient) */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black/30 p-3 sm:p-4 flex flex-col justify-end">
+      <div className="absolute bottom-0 left-0 right-0 bg-black/30 p-3 sm:p-2 flex flex-col justify-end">
         <div className="text-white">
           <h3 className="text-lg sm:text-xl font-bold font-fredoka group-hover:text-orange-500 transition-colors">
             {name}
           </h3>
 
           <div className="flex items-center space-x-2 text-xs sm:text-sm font-inter font-medium">
-            <span>Shop Now</span>
-            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+            <span>View Meals</span>
+            <span className="inline-block text-2xl transition-transform duration-300 group-hover:translate-x-1">
               →
             </span>
           </div>
