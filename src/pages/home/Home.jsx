@@ -70,7 +70,7 @@ function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">Main Menu</h2>
+              <h2 className="text-xl font-semibold text-gray-900 sm:text-3xl sm:text-center lg:text-left">Main Menu</h2>
               <p className="mt-1 text-sm text-gray-600">Explore our favorites to get inspired.</p>
             </div>
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center">

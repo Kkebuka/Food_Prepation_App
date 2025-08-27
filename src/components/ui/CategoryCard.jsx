@@ -6,9 +6,8 @@ export default function CategoryCard({ name, image,rounded}) {
       to={`/category/${name}`}
       className="group relative card w-full bg-base-100 rounded-full overflow-hidden transition-transform duration-300 hover:-translate-y-2"
     >
-        <div className="rounded-full">      
       {/* Image */}
-      <figure className="aspect-square  overflow-hidden">
+      <figure className="aspect-square overflow-hidden">
         <img
           src={image}
           alt={name}
@@ -36,7 +35,6 @@ export default function CategoryCard({ name, image,rounded}) {
 
       {/* Hover border effect */}
       <div className="absolute inset-0 border-2 border-transparent rounded-2xl group-hover:border-primary/30 transition-colors duration-300 pointer-events-none"></div>
-      </div>
     </Link>
   );
 }

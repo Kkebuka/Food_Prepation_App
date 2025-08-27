@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useFavorites } from "../../contexts/FavoritesContext.jsx";
 
 function useQueryParam(name) {
   const { search } = useLocation();
@@ -48,6 +49,9 @@ export default function Meals() {
     return result;
   }, [byName, byIngredient, sortOrder]);
 
+  const { favorites, toggleFavorite } = useFavorites();
+  const favoriteIds = useMemo(() => new Set(favorites.map((f) => f.id)), [favorites]);
+
   return (
     <main className="py-6 sm:py-8 lg:py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -74,16 +78,26 @@ export default function Meals() {
         {merged.length > 0 && (
           <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
             {merged.map((meal) => (
-              <article key={meal.id} className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <img src={meal.image} alt={meal.name} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent/10 to-transparent opacity-0 transition group-hover:opacity-100" />
-                </div>
-                <div className="flex items-center justify-between px-3 py-3 sm:px-4 sm:py-4">
-                  <h3 className="line-clamp-1 text-sm font-semibold text-gray-900 sm:text-base">{meal.name}</h3>
-                  <Link to={`/details/${meal.id}`} className="text-sm font-medium text-rose-600 hover:underline">Details</Link>
-                </div>
-              </article>
+              <Link to={`/details/${meal.id}`} key={meal.id}>
+                <article className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img src={meal.image} alt={meal.name} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent/10 to-transparent opacity-0 transition group-hover:opacity-100" />
+                  </div>
+                  <div className="flex items-center justify-between px-3 py-3 sm:px-4 sm:py-4">
+                    <h3 className="line-clamp-1 text-sm font-semibold text-gray-900 sm:text-base">{meal.name}</h3>
+                    <button
+                      className={`inline-flex h-9 w-9 items-center justify-center rounded-full border transition hover:border-rose-300 hover:bg-rose-50 ${favoriteIds.has(meal.id) ? 'border-rose-300 bg-rose-50 text-rose-600' : 'border-gray-200 text-gray-700'}`}
+                      aria-label="Save for later"
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(meal); }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`h-5 w-5 ${favoriteIds.has(meal.id) ? 'text-rose-600' : 'text-current'}`}>
+                        <path d="M11.645 20.91a.75.75 0 0 1-.79 0c-1.873-1.12-3.995-2.885-5.66-4.768C3.48 14.667 2.25 12.77 2.25 10.5 2.25 7.186 4.936 4.5 8.25 4.5c1.676 0 3.174.696 4.25 1.811A5.864 5.864 0 0 1 16.75 4.5c3.314 0 6 2.686 6 6 0 2.27-1.23 4.167-2.945 5.642-1.665 1.883-3.787 3.649-5.66 4.768Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
         )}
