@@ -51,11 +51,11 @@ function Home() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="py-14 sm:py-20 lg:py-28">
               <div className="mx-auto max-w-3xl flex flex-col gap-4 align-center items-center justify-center   ">
-                <h1 className="text-justify text-3xl font-extrabold tracking-tight flex   text-white sm:text-4xl md:text-5xl">
+                <h1 className="text-justify text-4xl font-extrabold tracking-tight flex   text-white sm:text-4xl md:text-5xl">
                   Home of delicious recipe
                 </h1>
                 <p className="mt-4 text-justify text-base text-gray-100 sm:text-lg">
-                  Experience the process of making the best meals
+                Turn cooking into an unforgettable culinary adventure.
                 </p>
               </div>
             </div>

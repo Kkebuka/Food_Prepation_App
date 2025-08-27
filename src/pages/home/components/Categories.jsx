@@ -17,7 +17,7 @@ import { useQuery } from '@tanstack/react-query'
 
   return (
     <div className="pb-4 lg:block ">
-      <h4 className="text-gray-800 font-semibold font-fredoka text-4xl py-6 text-center">
+      <h4 className="text-gray-800 font-bold font-fredoka text-4xl py-6 text-center">
         View by Category
       </h4>
       <div className="flex overflow-x-auto bg-base-200 gap-4 scrollbar-hide p-4 rounded-xl">
