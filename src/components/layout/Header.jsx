@@ -21,7 +21,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200/70 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="mx-auto  sm:px-6 ">
-        <div className="flex h-16 items-center   mx-6  lg:mx-0 justify-between">
+        <div className="flex h-16 items-center mx-4  lg:mx-0 justify-between">
           {/* Left: Brand */}
           <Link to="/" className="flex items-center gap-2">
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 text-white shadow-sm">
@@ -31,8 +31,8 @@ function Header() {
               </svg>
             </span>
             <span className="text-xl font-semibold tracking-tight">
-              <span className="bg-gradient-to-r from-rose-600 via-orange-500 to-amber-400 bg-clip-text text-transparent">Tasty</span>
-              <span className="text-gray-900">Bites</span>
+              <span className="bg-gradient-to-r from-rose-600 via-orange-500 to-amber-400 bg-clip-text text-transparent">Food</span>
+              <span className="text-gray-900">court</span>
             </span>
           </Link>
 

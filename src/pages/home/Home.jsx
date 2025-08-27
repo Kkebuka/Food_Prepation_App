@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
   import Category from "./components/Categories";
 import { useFavorites } from "../../contexts/FavoritesContext.jsx";
+import HeroSection from "./components/HeroSection.jsx";
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState("Beef");
@@ -44,24 +45,7 @@ function Home() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/30" />
-        <div className="relative">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="py-14 sm:py-20 lg:py-28">
-              <div className="mx-auto max-w-3xl flex flex-col gap-4 align-center items-center justify-center   ">
-                <h1 className="text-justify text-4xl font-extrabold tracking-tight flex   text-white sm:text-4xl md:text-5xl">
-                  Home of delicious recipe
-                </h1>
-                <p className="mt-4 text-justify text-base text-gray-100 sm:text-lg">
-                Turn cooking into an unforgettable culinary adventure.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection/>
 
       <Category />
       {/* Main Menu Section */}
@@ -152,9 +136,9 @@ function Home() {
                   <path d="M7.5 2.25a.75.75 0 0 1 .75.75v6a2.25 2.25 0 1 1-4.5 0v-6a.75.75 0 0 1 1.5 0v2.25h.75V3a.75.75 0 0 1 1.5 0v2.25h.75V3a.75.75 0 0 1 .75-.75ZM14.25 2.25a.75.75 0 0 0-.75.75v6.75a3.75 3.75 0 0 0 3.75 3.75h.75V3a.75.75 0 0 0-1.5 0v3h-1.5V3a.75.75 0 0 0-1.5 0v3h-1.5V3a.75.75 0 0 0-.75-.75Z"/>
                 </svg>
               </span>
-              <span className="text-sm font-semibold text-gray-900">TastyBites</span>
+              <span className="text-sm font-semibold text-gray-900">Foodcourt</span>
             </div>
-            <p className="text-center text-xs text-gray-500 sm:text-sm">© {new Date().getFullYear()} TastyBites. All rights reserved.</p>
+            <p className="text-center text-xs text-gray-500 sm:text-sm">© {new Date().getFullYear()} Foodcourt. All rights reserved.</p>
           </div>
         </div>
       </footer>
