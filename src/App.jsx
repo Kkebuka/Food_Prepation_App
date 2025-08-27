@@ -1,8 +1,9 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
-import Categories from "./pages/categories/Categories";
+import Category from "./pages/category/Category";
 import FoodDetails from "./pages/foodDetails/FoodDetails";
+import CategoryProduct from "./pages/categoryProducts/categoryProduct";
 import Home from "./pages/home/Home";
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index path="" element={<Home />} />
-          <Route index path="categories" element={<Categories />} />
-          <Route index path="details" element={<FoodDetails />} />
+          <Route index path="categories" element={<Category />} />
+          <Route index path="details/:id" element={<FoodDetails />} />
+          <Route index path="category/:name" element={<CategoryProduct />} />
         </Route>
       </Routes>
     </>

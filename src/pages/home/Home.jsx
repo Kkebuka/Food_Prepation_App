@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import Category from "./components/category";
+  import Category from "./components/Categories";
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState("Beef");
@@ -55,7 +55,7 @@ function Home() {
         </div>
       </section>
 
-<Category />
+      <Category />
       {/* Main Menu Section */}
       
       <section className="py-6 sm:py-8 lg:py-10">
@@ -114,7 +114,7 @@ function Home() {
                   <h3 className="line-clamp-1 text-sm font-semibold text-gray-900 sm:text-base">
                     {meal.name}
                   </h3>
-                  <Link to={`/food/${meal.id}`} className="text-sm font-medium text-rose-600 hover:underline">Details</Link>
+                  <Link to={`/details/${meal.id}`} className="text-sm font-medium text-rose-600 hover:underline">Details</Link>
                   <button
                     className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-gray-700 transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-600"
                     aria-label="Save for later"

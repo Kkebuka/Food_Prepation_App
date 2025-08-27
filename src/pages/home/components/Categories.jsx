@@ -2,7 +2,7 @@ import React from 'react'
 import CategoryCard from '../../../components/ui/CategoryCard'
 import { useQuery } from '@tanstack/react-query'
 
-function Category() {
+    function Categories() {
   const { data, isLoading } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
@@ -37,4 +37,4 @@ function Category() {
   )
 }
 
-export default Category
+export default Categories
