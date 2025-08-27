@@ -21,7 +21,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200/70 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="mx-auto  sm:px-6 ">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center   mx-6  lg:mx-0 justify-between">
           {/* Left: Brand */}
           <Link to="/" className="flex items-center gap-2">
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 text-white shadow-sm">
