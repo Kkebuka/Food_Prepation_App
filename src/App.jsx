@@ -6,9 +6,11 @@ import FoodDetails from "./pages/foodDetails/FoodDetails";
 import CategoryProduct from "./pages/categoryProducts/categoryProduct";
 import Home from "./pages/home/Home";
 import Meals from "./pages/meals/Meals";
+import ScrollToTop from "./components/layout/ScrollToTop";
 function App() {
   return (
     <>
+    <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index path="" element={<Home />} />
